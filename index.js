@@ -116,7 +116,7 @@ class EpicGamesClientLoginAdapter {
       await usernameOrEmailField.type(login, { delay: options.inputDelay });
       const passwordField = await page.waitForSelector('#password');
       await passwordField.type(credentials.password, { delay: options.inputDelay });
-      const loginButton = await page.waitForSelector('#login:not(:disabled)');
+      const loginButton = await page.waitForSelector('#sign-in:not(:disabled)');
       await loginButton.click();
     }
 
@@ -199,6 +199,7 @@ class EpicGamesClientLoginAdapter {
     await pendingXHR.waitOnceForAllXhrFinished();
     await page.waitFor(1000);
     await pendingDocument.waitOnceForAllXhrFinished();
+    await page.waitFor(3000);
 
     if (page.url() != this.ACCOUNT_PAGE) {
       await this.authenticate(credentials, page, options);
